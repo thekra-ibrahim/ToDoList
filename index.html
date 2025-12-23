@@ -17,3 +17,17 @@
       <button onclick="handleAddTask()">Add new task</button>
     </div>
   </div>
+
+  <h2>Todo List</h2>
+  <div class="filters">
+    <button onclick="filterTasks('all')">All</button>
+    <button onclick="filterTasks('done')">Done</button>
+    <button onclick="filterTasks('todo')">Todo</button>
+  </div>
+
+  <div class="task-list" id="taskList"></div>
+
+  <div class="bulk-actions">
+    <button onclick="deleteDoneTasks()">Delete Done Task</button>
+    <button onclick="handleDeleteAll()">Delete All Task</button>
+  </div>
