@@ -17,3 +17,8 @@ function saveTodos() {
 function isValidTask(name) {
   return name.trim().length >= 5 && isNaN(parseInt(name.trim()[0], 10));
 }
+
+function renderTasks() {
+  const taskList = document.getElementById("taskList");
+  taskList.innerHTML = "";
+}
