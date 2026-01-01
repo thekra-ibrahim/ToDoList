@@ -61,5 +61,16 @@ function openModal({ title, msg, confirm, needsInput, defaultInput = "" }) {
   document.getElementById("modalTitle").textContent = title;
   document.getElementById("modalMsg").textContent = msg;
 }
+const input = document.getElementById("modalInput");
+
+  if (needsInput) {
+    input.classList.remove("hidden");
+    input.value = defaultInput;
+    input.focus();
+  } else {
+    input.classList.add("hidden");
+  }
+
+  document.getElementById("modal").classList.remove("hidden");
 
 
