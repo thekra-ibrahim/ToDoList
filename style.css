@@ -146,3 +146,51 @@ h2 {
 }
 
 
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: grid;
+  place-items: center;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 320px;
+}
+
+.modal-content input {
+  width: 100%;
+  margin: 0.75rem 0;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: end;
+  gap: 0.5rem;
+}
+
+.confirmButton {
+  border: none;
+  border-radius: 8px;
+  color: white;
+  background-color: #0096B2;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.cancelButton {
+  border: none;
+  border-radius: 8px;
+  color: white;
+  background-color: #a4281a;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
