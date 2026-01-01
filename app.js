@@ -1,3 +1,81 @@
+
+let tasks = [];
+let filter = 'all';
+
+function loadTodos() {
+  const storedTasks = localStorage.getItem('tasks');
+  if (storedTasks) {
+    tasks = JSON.parse(storedTasks);
+  } else {
+    tasks = [];
+  }
+}
+
+function saveTodos() {
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+function isValidTask(name) {
+  return name.trim().length >= 5 && isNaN(parseInt(name.trim()[0], 10));
+}
+
+function renderTasks() {
+  const taskList = document.getElementById("taskList");
+  taskList.innerHTML = "";
+}
+  const filteredTasks = tasks.filter(task => {
+    if (filter === 'all') return true;
+    if (filter === 'done') return task.done;
+    if (filter === 'todo') return !task.done;
+  });
+
+  filteredTasks.forEach((task) => {
+    const taskItem = document.createElement("div");
+    taskItem.className = "task-item";
+
+    const taskText = document.createElement("div");
+    taskText.className = "task-text";
+    taskText.textContent = task.text;
+    if (task.done) taskText.classList.add("done");
+
+    const actions = document.createElement("div");
+    actions.className = "task-actions";
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = task.done;
+    checkbox.onchange = () => {
+      const foundTask = tasks.find(t => t.id === task.id);
+      if (foundTask) {
+        foundTask.done = checkbox.checked;
+        saveTodos();
+        renderTasks();
+      }
+    };
+
+
+    const editBtn = document.createElement("button");
+    editBtn.innerHTML = "✍";
+    editBtn.className = "edit";
+    editBtn.onclick = () => {
+      openModal({
+        title: "Rename Task",
+        msg: "",
+        confirm: (newName) => {
+          if (isValidTask(newName)) {
+            const foundTask = tasks.find(t => t.id === task.id);
+            if (foundTask) {
+              foundTask.text = newName.trim();
+              saveTodos();
+              renderTasks();
+            }
+          }
+        },
+        needsInput: true,
+        defaultInput: task.text
+      });
+    };
+    
 const deleteBtn = document.createElement("button");
     deleteBtn.innerHTML = "🗑️";
     deleteBtn.className = "delete";
@@ -16,7 +94,8 @@ deleteBtn.onclick = () => {
         needsInput: false
       });
     };
-actions.appendChild(checkbox);
+    
+    actions.appendChild(checkbox);
     actions.appendChild(editBtn);
     actions.appendChild(deleteBtn);
 
@@ -55,13 +134,13 @@ function handleAddTask() {
   input.value = "";
   renderTasks();
 }
+
 let modalConfig = {};
 function openModal({ title, msg, confirm, needsInput, defaultInput = "" }) {
   modalConfig = { confirm, needsInput };
   document.getElementById("modalTitle").textContent = title;
   document.getElementById("modalMsg").textContent = msg;
-}
-const input = document.getElementById("modalInput");
+  const input = document.getElementById("modalInput");
 
   if (needsInput) {
     input.classList.remove("hidden");
@@ -72,9 +151,12 @@ const input = document.getElementById("modalInput");
   }
 
   document.getElementById("modal").classList.remove("hidden");
+}
+
 function closeModal() {
   document.getElementById("modal").classList.add("hidden");
 }
+
 function modalConfirm() {
   const input = document.getElementById("modalInput");
   const msg = document.getElementById("modalMsg");
