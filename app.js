@@ -56,5 +56,10 @@ function handleAddTask() {
   renderTasks();
 }
 let modalConfig = {};
+function openModal({ title, msg, confirm, needsInput, defaultInput = "" }) {
+  modalConfig = { confirm, needsInput };
+  document.getElementById("modalTitle").textContent = title;
+  document.getElementById("modalMsg").textContent = msg;
+}
 
 
