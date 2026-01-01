@@ -40,3 +40,7 @@ function renderTasks() {
     const actions = document.createElement("div");
     actions.className = "task-actions";
 
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = task.done;
+
