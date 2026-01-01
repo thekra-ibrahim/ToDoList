@@ -9,3 +9,7 @@ function loadTodos() {
     tasks = [];
   }
 }
+
+function saveTodos() {
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+}
