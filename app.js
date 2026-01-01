@@ -33,5 +33,27 @@ function deleteDoneTasks() {
   saveTodos();
   renderTasks();
 }
+function handleAddTask() {
+  const input = document.getElementById("taskInput");
+  const msg = document.getElementById("validationMsg");
+  const text = input.value.trim();
+
+  if (!isValidTask(text)) {
+    msg.textContent = "Task must be ≥ 5 characters and not start with a number.";
+    msg.classList.remove("hidden");
+    return;
+  }
+  msg.classList.add("hidden");
+
+  tasks.push({
+    id: Date.now(),
+    text,
+    done: false
+  });
+
+  saveTodos();
+  input.value = "";
+  renderTasks();
+}
 
 
