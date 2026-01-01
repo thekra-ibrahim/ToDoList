@@ -24,4 +24,9 @@ actions.appendChild(checkbox);
     taskItem.appendChild(actions);
     taskList.appendChild(taskItem);
   });
+function filterTasks(type) {
+  filter = type;
+  renderTasks();
+}
+
 
