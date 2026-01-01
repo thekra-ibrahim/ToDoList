@@ -116,4 +116,33 @@ h2 {
   color: red;
 }
 
+.bulk-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.bulk-actions button {
+  padding: 10px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  flex: 1;
+}
+
+.msg {
+  font-size: 0.85rem;
+  color: #d32f2f;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
 
