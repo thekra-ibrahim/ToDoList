@@ -28,5 +28,10 @@ function filterTasks(type) {
   filter = type;
   renderTasks();
 }
+function deleteDoneTasks() {
+  tasks = tasks.filter(t => !t.done);
+  saveTodos();
+  renderTasks();
+}
 
 
