@@ -43,4 +43,13 @@ function renderTasks() {
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.checked = task.done;
+    checkbox.onchange = () => {
+      const foundTask = tasks.find(t => t.id === task.id);
+      if (foundTask) {
+        foundTask.done = checkbox.checked;
+        saveTodos();
+        renderTasks();
+      }
+    };
+
 
