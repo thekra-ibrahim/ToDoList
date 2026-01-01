@@ -55,5 +55,6 @@ function handleAddTask() {
   input.value = "";
   renderTasks();
 }
+let modalConfig = {};
 
 
