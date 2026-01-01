@@ -22,3 +22,9 @@ function renderTasks() {
   const taskList = document.getElementById("taskList");
   taskList.innerHTML = "";
 }
+  const filteredTasks = tasks.filter(task => {
+    if (filter === 'all') return true;
+    if (filter === 'done') return task.done;
+    if (filter === 'todo') return !task.done;
+  });
+
