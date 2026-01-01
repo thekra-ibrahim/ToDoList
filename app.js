@@ -28,3 +28,7 @@ function renderTasks() {
     if (filter === 'todo') return !task.done;
   });
 
+  filteredTasks.forEach((task) => {
+    const taskItem = document.createElement("div");
+    taskItem.className = "task-item";
+
