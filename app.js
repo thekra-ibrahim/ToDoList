@@ -1,11 +1,15 @@
-
 let tasks = [];
 let filter = 'all';
 
 function loadTodos() {
   const storedTasks = localStorage.getItem('tasks');
   if (storedTasks) {
-    tasks = JSON.parse(storedTasks);
+    try {
+      tasks = JSON.parse(storedTasks);
+      if (!Array.isArray(tasks)) tasks = [];
+    } catch (e) {
+      tasks = [];
+    }
   } else {
     tasks = [];
   }
@@ -16,13 +20,14 @@ function saveTodos() {
 }
 
 function isValidTask(name) {
-  return name.trim().length >= 5 && isNaN(parseInt(name.trim()[0], 10));
+  const trimmed = name.trim();
+  return trimmed.length >= 5 && !/^\d/.test(trimmed);
 }
 
 function renderTasks() {
   const taskList = document.getElementById("taskList");
   taskList.innerHTML = "";
-}
+
   const filteredTasks = tasks.filter(task => {
     if (filter === 'all') return true;
     if (filter === 'done') return task.done;
@@ -53,7 +58,6 @@ function renderTasks() {
       }
     };
 
-
     const editBtn = document.createElement("button");
     editBtn.innerHTML = "✍";
     editBtn.className = "edit";
@@ -75,11 +79,11 @@ function renderTasks() {
         defaultInput: task.text
       });
     };
-    
-const deleteBtn = document.createElement("button");
+
+    const deleteBtn = document.createElement("button");
     deleteBtn.innerHTML = "🗑️";
     deleteBtn.className = "delete";
-deleteBtn.onclick = () => {
+    deleteBtn.onclick = () => {
       openModal({
         title: "Delete Task?",
         msg: "Are you sure you want to delete this task?",
@@ -94,7 +98,7 @@ deleteBtn.onclick = () => {
         needsInput: false
       });
     };
-    
+
     actions.appendChild(checkbox);
     actions.appendChild(editBtn);
     actions.appendChild(deleteBtn);
@@ -103,15 +107,19 @@ deleteBtn.onclick = () => {
     taskItem.appendChild(actions);
     taskList.appendChild(taskItem);
   });
+}
+
 function filterTasks(type) {
   filter = type;
   renderTasks();
 }
+
 function deleteDoneTasks() {
   tasks = tasks.filter(t => !t.done);
   saveTodos();
   renderTasks();
 }
+
 function handleAddTask() {
   const input = document.getElementById("taskInput");
   const msg = document.getElementById("validationMsg");
@@ -177,5 +185,3 @@ function modalConfirm() {
 
 loadTodos();
 renderTasks();
-
-
