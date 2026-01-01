@@ -35,3 +35,17 @@ h2 {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+
+.inputGroup button {
+  border: none;
+  color: white;
+  background-color: #0096B2;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.inputGroup button:hover {
+  background-color: #04505e;
+}
