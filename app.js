@@ -53,3 +53,7 @@ function renderTasks() {
     };
 
 
+    const editBtn = document.createElement("button");
+    editBtn.innerHTML = "✍";
+    editBtn.className = "edit";
+
